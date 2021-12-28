@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="axibo",
-    version="0.0.1",
+    version="0.0.2",
     author="Reiner Schmidt",
     author_email="reiner@axibo.com",
     description="Pyhton package for interfacing with Axibo hardware",
@@ -16,6 +16,10 @@ setuptools.setup(
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
+    ],
+    install_requires=[
+        "pillow",
+        "websocket-client"
     ],
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
