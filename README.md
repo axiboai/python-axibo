@@ -21,9 +21,24 @@ This library can be used to connect AXIBO to virtual production tools as well as
 Installation
 ------------
 ```bash
-    git clone https://github.com/axiboai/python-axibo.git
-    cd python-axibo
-    pip install . 
+git clone https://github.com/axiboai/python-axibo.git
+cd python-axibo
+pip install . 
+```
+
+Simple Usage
+------------
+Make sure your AXIBO controller is connected to the network. Once connected you will be able to import and initialize the module. Check out the samples for more details.
+```python
+from axibo import Axibo
+
+my_axibo = Axibo("192.168.1.2") #make sure to change this to your AXIBO!
+
+my_axibo.camera.capture_image_to_file("test_image.jpg")
+
+my_axibo.pan.move_absolute(angle=10.00, speed=5.00)
+my_axibo.pan.move_absolute(angle=5.00, speed=2.50)
+my_axibo.update()
 ```
 
 Supported Hardware
