@@ -119,6 +119,9 @@ class Axibo:
         self.slide = slide.Slide(self.dev)
         self.camera = camera.Camera(self.dev)
 
+    def hardware_info(self):
+        return self.dev.request_get('system/info').json()
+        
     def update(self):
         self.dev.execute_api_requests()
         
