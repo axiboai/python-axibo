@@ -40,6 +40,18 @@ class Tilt:
             }
         )
 
+    def move_relative(self, angle, speed=None):
+        if speed != None:
+            out_speed = speed
+        else:
+            speed = self.speed
+        self.dev.load_action(
+            action_type='req_put',
+            data = {
+                'direct-control/move-relative' : {self.name : [angle, speed] }
+            }
+        )
+
     def current_position(self):
         return self.dev.stream.device_status_message[self.name]['position']
         

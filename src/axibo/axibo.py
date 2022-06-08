@@ -121,6 +121,9 @@ class Axibo:
 
     def update(self):
         self.dev.execute_api_requests()
+        
+    def stop(self):
+        self.dev.request_put('direct-control/stop-motion', {})
 
     def connected(self):
         try:
