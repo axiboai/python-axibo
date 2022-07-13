@@ -12,7 +12,7 @@
     </div>
 
 
-**python-axibo** is a library used to interface with AXIBO hardware
+**python-axibo** is a library used to interface with AXIBO INC hardware
 
 The AXIBO ecosystem of hardware components can be easily controlled using this library. This library was created to allow users to extend the applications of Axibo hardware beyond what is avalible in the application.
 
