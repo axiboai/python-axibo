@@ -11,3 +11,4 @@ if __name__ == '__main__':
     x.camera.capture_image_to_file("test_image.jpg")
     print("Captured image from Axibo")
 
+##
