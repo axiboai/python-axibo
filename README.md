@@ -32,13 +32,10 @@ Make sure your AXIBO controller is connected to the network. Once connected you 
 ```python
 from axibo import Axibo
 
-my_axibo = Axibo("192.168.1.2") #make sure to change this to your AXIBO!
+my_axibo = Axibo() 
+my_axibo.camera.camera_view()
+my_axibo.motion.set_relative_move("pan", pos=10, speed=15) # relative move
 
-my_axibo.camera.capture_image_to_file("test_image.jpg")
-
-my_axibo.pan.move_absolute(angle=10.00, speed=5.00)
-my_axibo.pan.move_absolute(angle=5.00, speed=2.50)
-my_axibo.update()
 ```
 
 Supported Hardware

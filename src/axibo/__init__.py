@@ -1,1 +1,1 @@
-from axibo.axibo import Axibo
+from .axibo import Axibo

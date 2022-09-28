@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="axibo",
-    version="0.0.2",
+    version="1.0.0",
     author="Reiner Schmidt",
     author_email="reiner@axibo.com",
     description="Pyhton package for interfacing with Axibo hardware",
