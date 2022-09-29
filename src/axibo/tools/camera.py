@@ -12,7 +12,8 @@ class Camera():
         self.settings_url = 'http://{}:2200/v1/imaging/config'.format(self.dev.ip)
         self.imgCalibration_url = 'http://{}:2200/v1/imaging/calib'.format(self.dev.ip)
         self.stream_url ='http://{}:2101/mjpeg'.format(self.dev.ip)
-
+        self.opencv_flag=False
+        self.pil_flag=False
         self.headers = {'Content-Type':'application/json'}
         
         self.payload = {
@@ -70,12 +71,14 @@ class Camera():
             f.write(response.content)
 
     def capture_pil_image(self):
-        from PIL import Image
+        if not self.pil_flag:
+            from PIL import Image
         response = self.dev.request_get_image(uri='imaging/cam')
         return Image.open(BytesIO(response.content))
 
     def camera_view(self):
-        import cv2
+        if not self.opencv_flag:
+            import cv2
         r = requests.get(self.stream_url, stream=True)
         if(r.status_code == 200):
             bytes = b""
@@ -237,8 +240,9 @@ class Camera():
         else:
             raise ValueError("Received unexpected status code {}".format(ret.status_code))
 
-    def get_opencv_image(self):
-        import cv2
+    def capture_opencv_image(self):
+        if not self.opencv_flag:
+            import cv2
         r = requests.get(self.stream_url, stream=True)
         if(r.status_code == 200):
             bytes = b""
