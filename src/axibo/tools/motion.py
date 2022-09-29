@@ -427,7 +427,7 @@ class MotionRoute():
     def get_location(self):
         list=[]
         for device in self.dev.stream.connected_axis:
-            print(device +" :"+ str(self.dev.stream.device_status_message[device]["position"]) )
+            print("{} : {}".format(device,str(self.dev.stream.device_status_message[device]["position"])))
             list.append(self.dev.stream.device_status_message[device]["position"])
         return list
         # tiltLoc = self.dev.stream.device_status_message["tilt"]["position"]

@@ -1,11 +1,6 @@
-from multiprocessing.sharedctypes import Value
 from re import L
-from turtle import pos
-from PIL import Image
 from io import BytesIO
-from matplotlib.font_manager import json_dump
 import requests
-import cv2
 import numpy as np
 
 import json
@@ -40,34 +35,34 @@ class Camera():
             1920 : 1080
         }
 
-    def help(self):
-        print("\n---> Camera Help <---\n")
+    # def help(self):
+    #     print("\n---> Camera Help <---\n")
         
-        print("Function: capture_image_to_file() \nDesciption: Captures the Axibo camera feed to an external file.\n")
+    #     print("Function: capture_image_to_file() \nDesciption: Captures the Axibo camera feed to an external file.\n")
         
-        print("Function: capture_pil_image() \nDesciption: Captures the PIL image.\n")
+    #     print("Function: capture_pil_image() \nDesciption: Captures the PIL image.\n")
         
-        print("Function: camera_view() \nDesciption: Starts the Axibo live camera feed.\n")
+    #     print("Function: camera_view() \nDesciption: Starts the Axibo live camera feed.\n")
         
-        print("Function: set_camera() \nDesciption: Sets the camera settings.\n")
+    #     print("Function: set_camera() \nDesciption: Sets the camera settings.\n")
 
-        print("Function: set_case() \nDescription: Whether the feed is from the Axibo or a HDMI camera.\n")
+    #     print("Function: set_case() \nDescription: Whether the feed is from the Axibo or a HDMI camera.\n")
 
-        print("Function: set_resolution() \nDescription: Sets the Axibo and HDMI resolution.\n")
+    #     print("Function: set_resolution() \nDescription: Sets the Axibo and HDMI resolution.\n")
         
-        print("Function: set_rotation() \nDescription: Sets the rotation of the Axibo camera feed.\n")
+    #     print("Function: set_rotation() \nDescription: Sets the rotation of the Axibo camera feed.\n")
 
-        print("Function: set_hdmiRotation() \nDescription: Sets the rotation of the HDMI camera feed.\n")
+    #     print("Function: set_hdmiRotation() \nDescription: Sets the rotation of the HDMI camera feed.\n")
 
-        print("Function: set_feed() \nDescription: Sets whether the Axibo or HDMI feed is bigger.\n")
+    #     print("Function: set_feed() \nDescription: Sets whether the Axibo or HDMI feed is bigger.\n")
 
-        print("Function: set_exposure() \nDescription: Sets the exposure of the Axibo camera.\n")
+    #     print("Function: set_exposure() \nDescription: Sets the exposure of the Axibo camera.\n")
 
-        print("Function: enable_autoExposure() \nDescription: Enables auto exposure.\n")
+    #     print("Function: enable_autoExposure() \nDescription: Enables auto exposure.\n")
 
-        print("Function: get_config() \nDescription: Returns the camera settings.\n")
+    #     print("Function: get_config() \nDescription: Returns the camera settings.\n")
 
-        print("Function: get_calibrationMatrix() \nDescription: Returns the calibration matrix.\n")
+    #     print("Function: get_calibrationMatrix() \nDescription: Returns the calibration matrix.\n")
 
     def capture_image_to_file(self, file_name='axibo_image.jpg'):
         response = self.dev.request_get_image(uri='imaging/cam')
@@ -75,10 +70,12 @@ class Camera():
             f.write(response.content)
 
     def capture_pil_image(self):
+        from PIL import Image
         response = self.dev.request_get_image(uri='imaging/cam')
         return Image.open(BytesIO(response.content))
 
     def camera_view(self):
+        import cv2
         r = requests.get(self.stream_url, stream=True)
         if(r.status_code == 200):
             bytes = b""
@@ -240,7 +237,8 @@ class Camera():
         else:
             raise ValueError("Received unexpected status code {}".format(ret.status_code))
 
-    def read(self):
+    def get_opencv_image(self):
+        import cv2
         r = requests.get(self.stream_url, stream=True)
         if(r.status_code == 200):
             bytes = b""
