@@ -66,16 +66,21 @@ class Camera():
     #     print("Function: get_calibrationMatrix() \nDescription: Returns the calibration matrix.\n")
 
     def capture_image_to_file(self, file_name='axibo_image.jpg'):
-        response = self.dev.request_get_image(uri='imaging/cam')
+        response = self.request_get_image()
         with open(file_name, 'wb') as f:
             f.write(response.content)
 
     def capture_pil_image(self):
         if not self.pil_flag:
             from PIL import Image
-        response = self.dev.request_get_image(uri='imaging/cam')
+        response = self.request_get_image()
         return Image.open(BytesIO(response.content))
-
+    
+    def request_get_image(self):
+        url = "http://{}:2200/v1/".format(self.dev.ip) + "imaging/cam"
+        ret = requests.get(url)
+        return ret
+    
     def camera_view(self):
         if not self.opencv_flag:
             import cv2
