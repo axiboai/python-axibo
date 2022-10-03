@@ -226,3 +226,20 @@ class System():
         json_formatted_str = json.dumps(obj, indent = 4)
 
         print(json_formatted_str)
+        
+    def update_redis_param(self, hash, key, value):
+        command = {
+            "name": "fromClient",
+            "data":
+            {
+                "case": "redis",
+                "redis": {
+                    "hash": hash,
+                    "key":key,
+                    "value":value
+                }
+                    
+                
+            }
+        }
+        self.dev.stream.ws.send(json.dumps(command))
