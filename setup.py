@@ -19,7 +19,9 @@ setuptools.setup(
     ],
     install_requires=[
         "pillow",
-        "websocket-client"
+        "websocket-client",
+        "opencv-python",
+        
     ],
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
