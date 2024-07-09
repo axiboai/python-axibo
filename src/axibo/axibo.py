@@ -50,7 +50,7 @@ class AxiboWebSocketHardwareStream:
     def on_close(self, ws, error, message):
         pass
 
-    def on_open(ws):
+    def on_open(self, ws):
         def run(*args):
             for i in range(3):
                 time.sleep(1)
